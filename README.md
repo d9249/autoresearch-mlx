@@ -24,6 +24,67 @@ uv run train.py
 
 Then point Claude Code or another coding agent at `program.md` and let it run the loop.
 
+## External Repo Mode
+
+This repo can also act as an autonomous orchestration harness for improving an
+external target repository instead of only editing the local `train.py`.
+
+Current built-in target:
+
+- `pp-ocr` table extraction on `hf_finance_legal_mrc`
+
+Files:
+
+- `scripts/pp_ocr_finance_legal_eval.py` - runs the target benchmark in the
+  `pp-ocr` virtualenv, compares `proposed` against saved or live competitor
+  baselines, and appends a TSV log row.
+- `program_pp_ocr_hf_finance_legal.md` - instructions for an autonomous agent
+  to edit `/Users/mean/Documents/Github/pp-ocr` while using this repo as the
+  control surface.
+- `pp_ocr_reference_notes.md` - reference-repo distilled logic notes used to
+  guide hypotheses for `Proposed (E2E Hybrid)` improvements.
+- `pp_ocr_finance_legal_targets.example.json` - example shape for a fixed
+  user-captured baseline target file.
+- `pp_ocr_results.tsv` - experiment log for the external-repo optimization loop.
+
+Quick check:
+
+```bash
+python scripts/pp_ocr_finance_legal_eval.py --note "baseline"
+```
+
+Refresh live competitor comparison when the target runtimes are available:
+
+```bash
+python scripts/pp_ocr_finance_legal_eval.py --run-live-competitors --note "live compare"
+```
+
+If you capture full-dataset competitor baselines separately, save them as:
+
+- `pp_ocr_finance_legal_targets.json`
+
+The evaluator will prefer that fixed target file over the latest saved unified
+benchmark JSON fallback.
+
+Launch an agent that actually edits `pp-ocr` using the latest benchmark snapshot:
+
+```bash
+python scripts/run_pp_ocr_autoresearch_agent.py
+```
+
+Preview the exact prompt/command without launching:
+
+```bash
+python scripts/run_pp_ocr_autoresearch_agent.py --print-prompt --dry-run
+```
+
+Run the stricter autonomous loop with enforced keep/revert logging and
+full-dataset validation:
+
+```bash
+python scripts/run_pp_ocr_autoresearch_strict_loop.py
+```
+
 ## What matters
 
 - `prepare.py` - data prep, tokenizer, dataloader, and evaluation. Treat as fixed.

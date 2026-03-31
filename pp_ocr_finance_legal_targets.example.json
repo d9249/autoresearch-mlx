@@ -1,0 +1,31 @@
+{
+  "dataset_name": "hf_finance_legal_mrc",
+  "captured_at": "2026-03-31T00:00:00+09:00",
+  "source": "replace with your full-dataset baseline capture source",
+  "targets": {
+    "external_paddleocr_vl": {
+      "row_accuracy": 1.0,
+      "column_accuracy": 1.0,
+      "cell_f1": 1.0,
+      "mean_cell_cer": 0.0048,
+      "teds": 0.9968,
+      "teds_struct": 1.0,
+      "composite_score": 0.9968,
+      "core_ms": 2096.0,
+      "e2e_ms": 2096.0,
+      "count": 10
+    },
+    "external_glm_ocr": {
+      "row_accuracy": 1.0,
+      "column_accuracy": 1.0,
+      "cell_f1": 1.0,
+      "mean_cell_cer": 0.0221,
+      "teds": 0.9818,
+      "teds_struct": 1.0,
+      "composite_score": 0.9818,
+      "core_ms": 4704.42,
+      "e2e_ms": 4704.42,
+      "count": 10
+    }
+  }
+}

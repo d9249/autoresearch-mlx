@@ -8,3 +8,8 @@ surfaces.txt
 surface-verify-prompt.md
 build-2-closeout.md
 /.omx
+pp_ocr_finance_legal_latest.json
+pp_ocr_finance_legal_targets.json
+pp_ocr_keep_revert.tsv
+pp_ocr_loop_log.jsonl
+pp_ocr_loop_runs/
